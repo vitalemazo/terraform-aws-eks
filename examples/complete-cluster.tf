@@ -15,8 +15,8 @@ terraform {
 module "eks" {
   source = "../modules/eks"
 
-  aws-region              = "us-east-1"
-  availability-zones      = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  aws-region              = "us-east-2"
+  availability-zones      = ["us-east-2a", "us-east-2b", "us-east-2c"]
   cluster-name            = "my-cluster"
   k8s-version             = "1.13"
   node-instance-type      = "t3.medium"
