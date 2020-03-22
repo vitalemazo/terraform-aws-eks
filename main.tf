@@ -7,6 +7,7 @@ module "eks" {
   cluster-name             = var.cluster-name
   k8s-version              = var.k8s-version
   node-instance-type       = var.node-instance-type
+  node-instance-type-public= var.node-instance-type-public
   kublet-extra-args        = var.kublet-extra-args
   public-kublet-extra-args = var.public-kublet-extra-args
   root-block-size          = var.root-block-size
