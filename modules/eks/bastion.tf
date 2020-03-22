@@ -9,7 +9,7 @@ module "bastion-asg" {
   lc_name = "${var.cluster-name}-bastion-lc"
 
   image_id                     = data.aws_ami.bastion.id
-  instance_type                = "t2.small"
+  instance_type                = "t2.micro"
   security_groups              = [data.aws_security_group.bastion.id]
   associate_public_ip_address  = true
   recreate_asg_when_lc_changes = true
