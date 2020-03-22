@@ -2,6 +2,7 @@ variable "public-min-size" {}
 variable "public-max-size" {}
 variable "public-desired-capacity" {}
 variable "public-kublet-extra-args" {}
+variable node-instance-type-public {}
 
 locals {
   eks-public-node-userdata = <<USERDATA
@@ -22,7 +23,7 @@ module "public-eks-nodes-asg" {
   lc_name = "${var.cluster-name}-node-public-lc"
 
   image_id                     = data.aws_ami.eks-worker-ami.id
-  instance_type                = var.node-instance-type
+  instance_type                = var.node-instance-type-public
   security_groups              = [data.aws_security_group.node.id]
   associate_public_ip_address  = false
   recreate_asg_when_lc_changes = true

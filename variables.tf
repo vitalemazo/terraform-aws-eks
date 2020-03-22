@@ -68,10 +68,18 @@ variable "eks-cw-logging" {
 }
 
 variable "node-instance-type" {
-  default     = "m4.large"
+  default     = "t2.small"
   type        = string
   description = "Worker Node EC2 instance type"
 }
+
+
+variable "node-instance-type-public" {
+  default     = "t2.micro"
+  type        = string
+  description = "Worker Public Node EC2 instance type"
+}
+
 
 variable "root-block-size" {
   default     = "20"
@@ -99,7 +107,7 @@ variable "min-size" {
 }
 
 variable "public-min-size" {
-  default     = 1
+  default     = 0
   type        = string
   description = "Public Node groups min ASG capacity"
 }
@@ -111,7 +119,7 @@ variable "public-max-size" {
 }
 
 variable "public-desired-capacity" {
-  default     = 1
+  default     = 0
   type        = string
   description = "Public Node groups desired ASG capacity"
 }
