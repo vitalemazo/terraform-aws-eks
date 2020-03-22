@@ -1,8 +1,5 @@
 # terraform-aws-eks
 
-[![CircleCI](https://circleci.com/gh/WesleyCharlesBlake/terraform-aws-eks.svg?style=svg)](https://circleci.com/gh/WesleyCharlesBlake/terraform-aws-eks)
-[![TerraformRefigistry](https://img.shields.io/badge/Terraform%20Registry-version_2-blue.svg)](https://registry.terraform.io/modules/WesleyCharlesBlake/eks/aws/)
-
 
 Deploy a full AWS EKS cluster with Terraform
 
@@ -27,9 +24,9 @@ You can configure you config with the following input variables:
 | Name                      | Description                        | Default                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `cluster-name`            | The name of your EKS Cluster       | `eks-cluster`                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `aws-region`              | The AWS Region to deploy EKS       | `us-east-1`                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `availability-zones`      | AWS Availability Zones             | `["us-east-1a", "us-east-1b", "us-east-1c"]`                                                                                                                                                                                                                                                                                                                                                                     |
-| `k8s-version`             | The desired K8s version to launch  | `1.13`                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `aws-region`              | The AWS Region to deploy EKS       | `us-east-2`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `availability-zones`      | AWS Availability Zones             | `["us-east-2a", "us-east-2b", "us-east-2c"]`                                                                                                                                                                                                                                                                                                                                                                     |
+| `k8s-version`             | The desired K8s version to launch  | `1.15`                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `node-instance-type`      | Worker Node EC2 instance type      | `m4.large`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `root-block-size`         | Size of the root EBS block device  | `20`                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `desired-capacity`        | Autoscaling Desired node capacity  | `2`                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -65,11 +62,11 @@ You can use this module from the Terraform registry as a remote source:
 module "eks" {
   source  = "WesleyCharlesBlake/eks/aws"
 
-  aws-region          = "us-east-1"
-  availability-zones  = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  aws-region          = "us-east-2"
+  availability-zones  = ["us-east-2a", "us-east-2b", "us-east-2c"]
   cluster-name        = "my-cluster"
-  k8s-version         = "1.13"
-  node-instance-type  = "t3.medium"
+  k8s-version         = "1.15"
+  node-instance-type  = "t3.micro"
   root-block-size     = "40"
   desired-capacity    = "3"
   max-size            = "5"
@@ -82,7 +79,7 @@ module "eks" {
   public-subnet-cidr  = ["10.0.128.0/20", "10.0.144.0/20", "10.0.160.0/20"]
   db-subnet-cidr      = ["10.0.192.0/21", "10.0.200.0/21", "10.0.208.0/21"]
   eks-cw-logging      = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
-  ec2-key-public-key  = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3F6tyPEFEzV0LX3X8BsXdMsQz1x2cEikKDEY0aIj41qgxMCP/iteneqXSIFZBp5vizPvaoIR3Um9xK7PGoW8giupGn+EPuxIA4cDM4vzOqOkiMPhz5XK0whEjkVzTo4+S0puvDZuwIsdiW9mxhJc7tgBNL0cYlWSYVkz4G/fslNfRPW5mYAM49f4fhtxPb5ok4Q2Lg9dPKVHO/Bgeu5woMc7RY0p1ej6D4CKFE6lymSDJpW0YHX/wqE9+cfEauh7xZcG0q9t2ta6F6fmX0agvpFyZo8aFbXeUBr7osSCJNgvavWbM/06niWrOvYX2xwWdhXmXSrbX8ZbabVohBK41 email@example.com"
+  ec2-key-public-key  = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDMPuLpon8ZEMKsrdFDGwdX1xpNAzBqhOAwzNX/2AAZ6+dd2JtogDqaNNoVYtRNgQpGuM8PUO4/iKHEYkBd5QbYOo/Ba4fz/QZS/amRE/37Sg9GQRzCxg6OcaavW5QaeayII/d/DTtmPZ825fdPnCShBZZXzFkpoF59B8hqFtwPVTl0h9KdVbZW+I8KqMB3LIi02KgMQEp9jrFHpABfFsG0WgP8BRogIm0foCQtDywGMJsd523dLBfd5na94ASRJX46LUEadiLbmJjiiwTuFkGTdbgwP/BxgToYWZTXkEhYlYAL/rDRdZvemxhPyU2hecy3osnv+RjWt4BTSHQ1r+EM8r3Z4m+tvKxQpQprpnd/vGo0iFNVdSXvCzix2R8MIkn4i4qese1mFPKN7HAqD4ExwS+luQMcNbGIvN4QBKx3yMDoc3mVu4ia7IKHB4RsEfn9w3teO16+ifKi7+xmBe58PX/tQ9HRY+a8pRTnJ94FbunwcUmN7zU8Sxkxw0rzr5vZgA3BMQQ5uUGUa9bo7ps4vObu0gChgiNsPFRff4drGzGGY2iDXiceO3WY58HCDp9fUj5u2o8cRO12ve1yiXchU/56Tk6fBzMg5L5epwbgVBpuGVO3olvkIBZd+Zur4zoHNlJXWf2ynYjB0w6zH6Zn3f1uHjF9Bz0dPqZLRjrzYw== vitalemazo@gmail.com"
 }
 
 output "kubeconfig" {
@@ -211,8 +208,8 @@ sudo kubectl edit -n kube-system configmap/aws-auth
 ```yaml
 
 mapUsers: |
-  - userarn: arn:aws:iam::111122223333:user/<username>
-    username: <username>
+  - userarn: arn:aws:iam::944723394512:user/terraform
+    username: terraform
     groups:
       - system:masters
 ```
@@ -238,9 +235,9 @@ data:
 * Once the user map is added in the configuration we need to create cluster role binding for that user:
 
 ```bash
-kubectl create clusterrolebinding ops-user-cluster-admin-binding-<username> --clusterrole=cluster-admin --user=<username>
+kubectl create clusterrolebinding ops-user-cluster-admin-binding-terraform --clusterrole=cluster-admin --user=terraform
 ```
-Replace the placeholder with proper values
+Replace the placeholder-- <  >   with proper values
 
 ### Cleaning up
 
